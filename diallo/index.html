@@ -1,0 +1,554 @@
+<!<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sucre d'Orge - Boutique</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+background:#fff8f0;
+color:#333;
+
+}
+
+header{
+
+position:fixed;
+top:0;
+width:100%;
+background:white;
+padding:18px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+z-index:1000;
+
+}
+
+.logo{
+
+font-family:'Playfair Display',serif;
+font-size:30px;
+font-weight:bold;
+color:#c9184a;
+text-decoration:none;
+
+}
+
+nav a{
+
+margin:0 10px;
+text-decoration:none;
+color:#333;
+font-weight:600;
+
+}
+
+.cart{
+
+background:#c9184a;
+color:white;
+padding:10px 18px;
+border-radius:30px;
+cursor:pointer;
+
+}
+
+.hero{
+
+min-height:100vh;
+padding:120px 5% 50px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:linear-gradient(135deg,#fff8f0,#ffb3c6);
+
+}
+
+.hero h1{
+
+font-family:'Playfair Display',serif;
+font-size:55px;
+margin-bottom:20px;
+
+}
+
+.hero span{
+
+color:#c9184a;
+
+}
+
+.hero p{
+
+font-size:18px;
+max-width:550px;
+line-height:1.7;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:15px 35px;
+background:#c9184a;
+color:white;
+border-radius:50px;
+text-decoration:none;
+
+}
+
+.hero img{
+
+width:400px;
+
+}
+
+.section{
+
+padding:70px 5%;
+
+}
+
+.title{
+
+text-align:center;
+font-family:'Playfair Display',serif;
+font-size:40px;
+margin-bottom:40px;
+
+}
+
+.products{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+
+}
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:25px;
+box-shadow:0 10px 30px #ddd;
+text-align:center;
+
+}
+
+.card img{
+
+width:100%;
+height:230px;
+object-fit:cover;
+border-radius:20px;
+
+}
+
+.card h3{
+
+margin:15px 0;
+
+}
+
+.price{
+
+font-size:22px;
+color:#c9184a;
+font-weight:bold;
+
+}
+
+.card button{
+
+margin-top:15px;
+background:#ff6b9d;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:30px;
+cursor:pointer;
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<a class="logo" href="#">
+🍬 Sucre d'Orge
+</a>
+
+<nav>
+
+<a href="#produits">Produits</a>
+<a href="#commande">Commande</a>
+<a href="#admin">Admin</a>
+
+</nav>
+
+<div class="cart" onclick="ouvrirPanier()">
+
+🛒 Panier (<span id="nombre">0</span>)
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div>
+
+<h1>
+ <STROng> Des bonbons qui donnent le sourire</STROng>
+</h1>
+
+<p>
+Découvrez nos bonbons artisanaux fabriqués avec amour.
+Commandez facilement depuis WhatsApp.
+</p>
+
+<a href="#produits" class="btn">
+Découvrir
+</a>
+
+</div>
+
+<img src="./20260717_202454 (2).jpg" alt="Bonbons">
+
+</section>
+
+<section class="section" id="produits">
+
+<h2 class="title">
+Nos produits
+</h2>
+
+<div class="products">
+
+<div class="card">
+
+<img src="./20260717_202454 (3).jpg">
+
+<h3>Bonbons Fraise</h3>
+
+<p class="price">
+5000 GNF
+</p>
+
+<button onclick="ajouter('Bonbons Fraise',5000)">
+Ajouter 🛒
+</button>
+
+</div>
+
+<div class="card">
+
+<img src="./20260717_202454.jpg">
+
+<h3>Bonbons Chocolat</h3>
+
+<p class="price">
+7000 GNF
+</p>
+
+<button onclick="ajouter('Bonbons Chocolat',7000)">
+Ajouter 🛒
+</button>
+
+</div>
+
+<div class="card">
+
+<img src="./20260717_202410.jpg">
+
+<h3>Bonbons Caramel</h3>
+
+<p class="price">
+6000 GNF
+</p>
+
+<button onclick="ajouter('Bonbons Caramel',6000)">
+Ajouter 🛒
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PANIER -->
+
+<div id="panier">
+
+<h2>
+Mon panier 🛒
+</h2>
+
+<div id="liste"></div>
+
+<h3>
+Total : <span id="total">0</span> GNF
+</h3>
+
+<h3>
+Informations client
+</h3>
+
+<input id="nom" placeholder="Votre nom">
+
+<input id="telephone" placeholder="Votre numéro WhatsApp">
+
+<button onclick="validerCommande()">
+Commander
+</button>
+
+<button onclick="fermerPanier()">
+Fermer
+</button>
+
+</div>
+
+<style>
+
+#panier{
+
+display:none;
+position:fixed;
+right:20px;
+top:100px;
+width:350px;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 40px #999;
+z-index:2000;
+
+}
+
+#panier input{
+
+width:100%;
+padding:12px;
+margin:8px 0;
+border-radius:10px;
+border:1px solid #ddd;
+
+}
+
+#panier button{
+
+background:#c9184a;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:30px;
+margin:5px;
+cursor:pointer;
+
+}
+
+.article{
+
+display:flex;
+justify-content:space-between;
+margin:15px 0;
+
+}
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+text-align:center;
+
+}
+
+.hero img{
+
+width:280px;
+
+}
+
+.products{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+<script>
+
+let panier = [];
+
+// AJOUTER UN PRODUIT
+
+function ajouter(nom,prix){
+
+panier.push({
+nom:nom,
+prix:prix
+});
+
+actualiserPanier();
+
+}
+
+// AFFICHER PANIER
+
+function actualiserPanier(){
+
+let liste=document.getElementById("liste");
+
+let total=0;
+
+liste.innerHTML="";
+
+panier.forEach((p,index)=>{
+
+total+=p.prix;
+
+liste.innerHTML+=`
+
+<div class="article">
+
+<span>${p.nom}</span>
+
+<span>
+${p.prix} GNF
+<button onclick="supprimer(${index})">
+❌
+</button>
+</span>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("total").innerHTML=total;
+
+document.getElementById("nombre").innerHTML=panier.length;
+
+}
+
+function supprimer(index){
+
+panier.splice(index,1);
+
+actualiserPanier();
+
+}
+
+function ouvrirPanier(){
+
+document.getElementById("panier").style.display="block";
+
+}
+
+function fermerPanier(){
+
+document.getElementById("panier").style.display="none";
+
+}
+
+// ENREGISTRER LA COMMANDE
+
+function validerCommande(){
+
+let nom=document.getElementById("nom").value;
+
+let telephone=document.getElementById("telephone").value;
+
+if(nom=="" || telephone=="" || panier.length==0){
+
+alert("Remplis toutes les informations");
+
+return;
+
+}
+
+let commande={
+
+nom:nom,
+
+telephone:telephone,
+
+produits:panier,
+
+date:new Date().toLocaleString()
+
+};
+
+let commandes=
+JSON.parse(localStorage.getItem("commandes")) || [];
+
+commandes.push(commande);
+
+localStorage.setItem(
+"commandes",
+JSON.stringify(commandes)
+);
+
+let message=
+"Bonjour Sucre d'Orge 🍬%0A";
+
+message+="Nom : "+nom+"%0A";
+
+message+="Commande :%0A";
+
+panier.forEach(p=>{
+
+message+="- "+p.nom+" "+p.prix+" GNF%0A";
+
+});
+
+message+="Téléphone : "+telephone;
+
+window.open(
+
+"https://wa.me/224662323907?text="+message,
+
+"_blank"
+
+);
+
+alert("Commande enregistrée !");
+
+panier=[];
+
+actualiserPanier();
+
+}
+
+</script>
+
+</body>
+
+</html>
